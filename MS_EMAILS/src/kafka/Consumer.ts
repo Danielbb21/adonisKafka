@@ -28,9 +28,11 @@ export default class Consumer {
         console.log(`Consumming topic ${topic}`);
         await this.consumer.run({
             eachMessage: async({topic, partition, message}) => {
-                console.log({
-                    message
-                })
+                
+                    const data =  JSON.parse(message.value!.toString());
+                    const {user, bets, admins} = data;
+                    console.log(user, bets, admins);
+                
             }
         })
     }
